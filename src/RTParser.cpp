@@ -2,6 +2,7 @@
 
 int RTParser::read_file(const char *pFilename)
 {
+    cout << "reading...";
     doc->LoadFile(pFilename);
 
     for (const tinyxml2::XMLElement *child = doc->FirstChildElement("raytracer")->FirstChildElement();

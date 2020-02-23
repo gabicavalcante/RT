@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include <memory>
 #include "tinyxml2.h"
@@ -11,7 +12,7 @@ private:
     std::shared_ptr<tinyxml2::XMLDocument> doc;
 
 public:
-    static std::shared_ptr<RTParser> instance()
+    static std::shared_ptr<RTParser> create()
     {
         return std::make_shared<RTParser>(RTParser());
     }

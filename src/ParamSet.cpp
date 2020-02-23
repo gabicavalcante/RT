@@ -17,13 +17,3 @@ void Object::print()
         it++;
     }
 }
-
-int main()
-{
-    Object o;
-    o.type = "camera";
-    o.add_attribute("type", "perspective");
-    o.add_attribute("name", "cam_flat");
-    o.print();
-    return 0;
-}
