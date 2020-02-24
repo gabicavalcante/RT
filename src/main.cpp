@@ -3,6 +3,18 @@
 #include "float.h"
 #include "hittable_list.h"
 #include "sphere.h"
+#include "camera.h"
+#include "random.h"
+
+vec3 random_in_unit_sphere()
+{
+	vec3 p;
+	do
+	{
+		p = 2.0 * vec3(random_double(), random_double(), random_double()) - vec3(1, 1, 1);
+	} while (p.squared_length() >= 1.0);
+	return p;
+}
 
 // blends white and blue depending on the up/downess of the y coordinate
 // linear_interpolation: blendedValue = (1 - t) * startValue + t * endValue
@@ -11,7 +23,8 @@ vec3 color(const ray &r, hittable *world)
 	hit_record rec;
 	if (world->hit(r, 0.0, MAXFLOAT, rec))
 	{
-		return 0.5 * vec3(rec.normal.x() + 1, rec.normal.y() + 1, rec.normal.z() + 1);
+		vec3 target = rec.p + rec.normal + random_in_unit_sphere();
+		return 0.5 * color(ray(rec.p, target - rec.p), world);
 	}
 	else
 	{
@@ -35,6 +48,8 @@ int main(int argc, char const *argv[])
 	//parser(argv[1])
 	int nx = 200;
 	int ny = 100;
+	int ns = 100;
+
 	std::cout << "P3\n"
 			  << nx << " " << ny << "\n255\n";
 
@@ -48,16 +63,21 @@ int main(int argc, char const *argv[])
 	list[1] = new sphere(vec3(0, -100.5, -1), 100);
 	hittable *world = new hittable_list(list, 2);
 
+	camera cam;
+
 	for (int j = ny - 1; j >= 0; j--)
 	{
 		for (int i = 0; i < nx; i++)
 		{
-			float u = float(i) / float(nx);
-			float v = float(j) / float(ny);
-			ray r(origin, lower_left_corner + (u * horizontal) + (v * vertical));
-
-			vec3 p = r.point_at_parameter(2.0);
-			vec3 col = color(r, world);
+			vec3 col(0, 0, 0);
+			for (int s = 0; s < ns; s++)
+			{
+				float u = float(i + random_double()) / float(nx);
+				float v = float(j + random_double()) / float(ny);
+				ray r = cam.get_ray(u, v);
+				col += color(r, world);
+			}
+			col /= float(ns);
 
 			int ir = int(255.99 * col[0]);
 			int ig = int(255.99 * col[1]);
