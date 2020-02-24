@@ -1,21 +1,27 @@
 #include "RTParser.h"
+#include "ParamSet.h"
 
-int RTParser::read_file(const char *pFilename)
+int RTParser::read_file()
 {
-    cout << "reading...";
-    doc->LoadFile(pFilename);
-
-    for (const tinyxml2::XMLElement *child = doc->FirstChildElement("raytracer")->FirstChildElement();
+    std::shared_ptr<Object> valuePtr;
+    for (const tinyxml2::XMLElement *child = doc->FirstChildElement("RT3")->FirstChildElement();
          child;
          child = child->NextSiblingElement())
     {
-        if (child->Attribute("type"))
-            valuePtr->add_attribute("type", child->Attribute("type"));
+        valuePtr = std::shared_ptr<Object>(new Object());
+        valuePtr->label = child->Value();
+        //std::cout << valuePtr->label << std::endl;
 
-        if (child->Attribute("name"))
-            valuePtr->add_attribute("name", child->Attribute("name"));
+        for (const tinyxml2::XMLAttribute *attr = child->FirstAttribute();
+             attr;
+             attr = attr->Next())
+        {
+            valuePtr->add_attribute(attr->Name(), attr->Value());
+        }
+
+        valuePtr->print();
+        std::cout << "\n";
     }
-    valuePtr->print();
 
     return 0;
 }

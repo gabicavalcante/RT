@@ -8,14 +8,20 @@
 class RTParser
 {
 private:
-    std::shared_ptr<Object> valuePtr;
     std::shared_ptr<tinyxml2::XMLDocument> doc;
 
-public:
-    static std::shared_ptr<RTParser> create()
+    RTParser()
     {
-        return std::make_shared<RTParser>(RTParser());
+        doc = std::shared_ptr<tinyxml2::XMLDocument>(new tinyxml2::XMLDocument());
+    };
+
+public:
+    static std::shared_ptr<RTParser> create(std::string file_path)
+    {
+        RTParser p;
+        p.doc->LoadFile(file_path.c_str());
+        return std::make_shared<RTParser>(p);
     }
 
-    int read_file(const char *pFilename);
+    int read_file();
 };

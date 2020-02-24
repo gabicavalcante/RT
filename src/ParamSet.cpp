@@ -7,6 +7,7 @@ void Object::add_attribute(string key, string value)
 
 void Object::print()
 {
+    cout << ">> " << label << endl;
     map<string, string>::iterator it = attributes.begin();
     while (it != attributes.end())
     {
