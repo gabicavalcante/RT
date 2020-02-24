@@ -14,7 +14,7 @@ using std::vector;
 class Object
 {
 public:
-    string label;
+    string tag;
     map<string, string> attributes;
 
     void add_attribute(string key, string value);

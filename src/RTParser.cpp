@@ -9,8 +9,7 @@ int RTParser::read_file()
          child = child->NextSiblingElement())
     {
         valuePtr = std::shared_ptr<Object>(new Object());
-        valuePtr->label = child->Value();
-        //std::cout << valuePtr->label << std::endl;
+        valuePtr->tag = child->Value();
 
         for (const tinyxml2::XMLAttribute *attr = child->FirstAttribute();
              attr;

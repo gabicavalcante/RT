@@ -7,14 +7,14 @@ void Object::add_attribute(string key, string value)
 
 void Object::print()
 {
-    cout << ">> " << label << endl;
+    cout << ">> " << tag << endl;
     map<string, string>::iterator it = attributes.begin();
     while (it != attributes.end())
     {
         string key = it->first;
         string value = it->second;
 
-        cout << key << ", " << value << endl;
+        cout << key << " -> " << value << endl;
         it++;
     }
 }
