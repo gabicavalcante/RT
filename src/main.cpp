@@ -1,6 +1,4 @@
 #include "RTParser.h"
-#include "vec3.h"
-#include "ray.h"
 #include "camera.h"
 #include "background.h"
 
@@ -18,8 +16,8 @@ void parser(string file_path)
 // TODO: read background data from input file
 std::shared_ptr<Background> dummy_init_bg()
 {
-	Background b;
-	return std::make_shared<Background>(b);
+	Background bg;
+	return std::make_shared<Background>(bg);
 }
 
 // TODO: read camera data from input file
