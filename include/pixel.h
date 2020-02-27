@@ -15,4 +15,8 @@ public:
         colors[1] = g;
         colors[2] = b;
     }
+
+    int get_r() { return colors[0]; }
+    int get_g() { return colors[1]; }
+    int get_b() { return colors[2]; }
 };

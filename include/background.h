@@ -1,19 +1,20 @@
 #pragma once
 #include "pixel.h"
-#include "vec3.h"
 
 class Background
 {
 public:
-    Background(){};
-
-    vec3 sample(float r_, float g_)
+    Pixel sample(float r_, float g_)
     {
-        float r = i;
-        float g = g;
+        float r = r_;
+        float g = g_;
         float b = 0.2;
 
-        vec3 col(r, g, b);
+        int ir = int(255.99 * r);
+        int ig = int(255.99 * g);
+        int ib = int(255.99 * b);
+
+        Pixel col(ir, ig, ib);
         return col;
     }
 };

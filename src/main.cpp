@@ -1,5 +1,6 @@
 #include "RTParser.h"
 #include "vec3.h"
+#include "ray.h"
 #include "camera.h"
 #include "background.h"
 
@@ -25,23 +26,33 @@ void parser(string file_path)
 	parser->read_file();
 }
 
-int main()
+std::shared_ptr<Background> dummy_init_bg()
+{
+	Background b;
+	return std::make_shared<Background>(b);
+}
+
+std::shared_ptr<Camera> dummy_init_camera()
 {
 	Camera cam(200, 100);
-	int w = cam.get_width();
-	int h = cam.get_height();
+	return std::make_shared<Camera>(cam);
+}
 
-	Background bg = new Background();
+int main()
+{
+	auto cam = dummy_init_camera();
+	int w = cam->get_width();
+	int h = cam->get_height();
 
-	std::cout << "P3\n"
-			  << w << " " << h << "\n255\n";
+	auto background = dummy_init_bg();
 
 	for (int j = h - 1; j >= 0; j--)
 	{
 		for (int i = 0; i < w; i++)
 		{
-			auto color = bg.sample(float(i) / float(w), float(j) / float(h));
-			cam.add(color);	
+			auto color = background->sample(float(i) / float(w), float(j) / float(h));
+			cam->add(j, i, color);
 		}
 	}
+	cam->write_image("output");
 }
