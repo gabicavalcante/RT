@@ -28,7 +28,6 @@ public:
     {
         if (x < width && x >= 0 && y < height && y >= 0)
             film.get()[y * width + x] = color;
-        //std::cout << film.get()[y * width + x].get_r() << " " << film.get()[y * width + x].get_g() << " " << film.get()[y * width + x].get_b() << "\n";
     }
 
     Pixel &get_pixel(const int &x, const int &y)
@@ -44,13 +43,12 @@ public:
              << width << " " << height << std::endl
              << "256" << std::endl;
 
-        for (int y = 0; y < height; y++)
+        for (int y = height - 1; y >= 0; y--)
         {
-            for (int x = 0; x < width; ++x)
+            for (int x = 0; x < width; x++)
             {
                 Pixel &p = get_pixel(x, y);
-                std::cout << (int)p.get_r() << " " << (int)p.get_g() << " " << (int)p.get_b() << "\n";
-                //file << (int)p.get_r() << " " << (int)p.get_g() << " " << (int)p.get_b() << " ";
+                file << (int)p.get_r() << " " << (int)p.get_g() << " " << (int)p.get_b() << " ";
             }
             file << std::endl;
         }
