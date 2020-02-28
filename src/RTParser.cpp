@@ -1,5 +1,5 @@
-#include "RTParser.h"
-#include "ParamSet.h"
+#include "rtparser.h"
+#include "paramset.h"
 
 int RTParser::read_file()
 {
@@ -9,7 +9,6 @@ int RTParser::read_file()
          child = child->NextSiblingElement())
     {
         valuePtr = std::shared_ptr<ParamSet>(new ParamSet());
-        //valuePtr->tag = child->Value();
 
         for (const tinyxml2::XMLAttribute *attr = child->FirstAttribute();
              attr;

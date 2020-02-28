@@ -1,4 +1,4 @@
-#include "RTParser.h"
+#include "rtparser.h"
 #include "camera.h"
 #include "background.h"
 

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 #include "tinyxml2.h"
-#include "ParamSet.h"
+#include "paramset.h"
 
 class RTParser
 {

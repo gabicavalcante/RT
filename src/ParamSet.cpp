@@ -1,4 +1,4 @@
-#include "ParamSet.h"
+#include "paramset.h"
 
 void ParamSet::add_attribute(string key, string value)
 {
