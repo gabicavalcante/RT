@@ -1,15 +1,15 @@
 #include "ParamSet.h"
 
-void Object::add_attribute(string key, string value)
+void ParamSet::add_attribute(string key, string value)
 {
-    attributes[key] = value;
+    (*attributes)[key] = value;
 }
 
-void Object::print()
+void ParamSet::print()
 {
-    cout << ">> " << tag << endl;
-    map<string, string>::iterator it = attributes.begin();
-    while (it != attributes.end())
+    cout << " --- " << endl;
+    std::map<string, string>::iterator it = attributes->begin();
+    while (it != attributes->end())
     {
         string key = it->first;
         string value = it->second;
@@ -17,4 +17,5 @@ void Object::print()
         cout << key << " -> " << value << endl;
         it++;
     }
+    cout << " --- " << endl;
 }

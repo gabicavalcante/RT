@@ -24,4 +24,5 @@ public:
     }
 
     int read_file();
+    ParamSet read_object(const char *tag);
 };
