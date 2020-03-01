@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-void parser(string file_path)
+void parser(std::string file_path)
 {
 	auto parser = RTParser::create(file_path);
 

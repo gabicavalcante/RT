@@ -19,40 +19,9 @@ private:
 public:
     static API *get_instance();
 
-    void camera(ParamSet ps)
-    {
-        int x_res, y_res;
-        string filename;
+    void camera(ParamSet ps);
+    std::shared_ptr<Camera> get_camera();
 
-        x_res = std::stoi(ps.get_attribute("x_res"));
-        y_res = std::stoi(ps.get_attribute("y_res"));
-        filename = ps.get_attribute("filename");
-
-        Camera cam(x_res, y_res, filename);
-        camera_ = std::make_shared<Camera>(cam);
-    }
-
-    std::shared_ptr<Camera> get_camera()
-    {
-        return camera_;
-    }
-
-    void background(ParamSet ps)
-    {
-        std::istringstream is(ps.get_attribute("color"));
-        int r, g, b;
-        is >> r >> g >> b;
-
-        Pixel color(r, g, b);
-        string type = ps.get_attribute("type");
-
-        Background bg(type, color);
-        background_ = std::make_shared<Background>(bg);
-        ;
-    }
-
-    std::shared_ptr<Background> get_background()
-    {
-        return background_;
-    }
+    void background(ParamSet ps);
+    std::shared_ptr<Background> get_background();
 };

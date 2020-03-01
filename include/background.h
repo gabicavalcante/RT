@@ -5,10 +5,10 @@
 class Background
 {
 public:
-    string type;
+    std::string type;
     Pixel color;
 
-    Background(string type_, Pixel color_) : type(type_), color(color_)
+    Background(std::string type_, Pixel color_) : type(type_), color(color_)
     {
     }
 
@@ -19,7 +19,6 @@ public:
         float g = g_;
         float b = b_;
 
-        //255.99
         int ir = int(color.get_r() * r);
         int ig = int(color.get_g() * g);
         int ib = int(color.get_b() * b);
