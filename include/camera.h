@@ -9,16 +9,16 @@ class Camera
 public:
     int width;
     int height;
-    string filename;
+    std::string filename;
 
     std::shared_ptr<Pixel> film;
 
     // camera borders
     double l, r, b, t;
 
-    Camera(int width_, int height_, string filename_) : width(width_),
-                                                        height(height_),
-                                                        filename(filename_)
+    Camera(int width_, int height_, std::string filename_) : width(width_),
+                                                             height(height_),
+                                                             filename(filename_)
 
     {
         film = std::shared_ptr<Pixel>(new Pixel[width * height]);

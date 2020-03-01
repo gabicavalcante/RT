@@ -5,23 +5,18 @@
 #include <map>
 #include <string>
 
-using std::cout;
-using std::endl;
-using std::string;
-using std::vector;
-
 class ParamSet
 {
 public:
-    std::unique_ptr<std::map<string, string>> attributes;
+    std::unique_ptr<std::map<std::string, std::string>> attributes;
 
     ParamSet()
     {
-        std::map<string, string> map_({});
-        attributes = std::make_unique<std::map<string, string>>(map_);
+        std::map<std::string, std::string> map_({});
+        attributes = std::make_unique<std::map<std::string, std::string>>(map_);
     }
 
-    void add_attribute(string key, string value);
-    string get_attribute(string key);
+    void add_attribute(std::string key, std::string value);
+    std::string get_attribute(std::string key);
     void print();
 };

@@ -1,26 +1,26 @@
 #include "paramset.h"
 
-void ParamSet::add_attribute(string key, string value)
+void ParamSet::add_attribute(std::string key, std::string value)
 {
     (*attributes)[key] = value;
 }
 
-string ParamSet::get_attribute(string key)
+std::string ParamSet::get_attribute(std::string key)
 {
     return (*attributes)[key];
 }
 
 void ParamSet::print()
 {
-    cout << " --- " << endl;
-    std::map<string, string>::iterator it = attributes->begin();
+    std::cout << " --- " << std::endl;
+    std::map<std::string, std::string>::iterator it = attributes->begin();
     while (it != attributes->end())
     {
-        string key = it->first;
-        string value = it->second;
+        std::string key = it->first;
+        std::string value = it->second;
 
-        cout << key << " -> " << value << endl;
+        std::cout << key << " -> " << value << std::endl;
         it++;
     }
-    cout << " --- " << endl;
+    std::cout << " --- " << std::endl;
 }
