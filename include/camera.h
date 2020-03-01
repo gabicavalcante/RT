@@ -9,14 +9,17 @@ class Camera
 public:
     int width;
     int height;
+    string filename;
 
     std::shared_ptr<Pixel> film;
 
     // camera borders
     double l, r, b, t;
 
-    Camera(int _width, int _height) : width(_width),
-                                      height(_height)
+    Camera(int width_, int height_, string filename_) : width(width_),
+                                                        height(height_),
+                                                        filename(filename_)
+
     {
         film = std::shared_ptr<Pixel>(new Pixel[width * height]);
     }
@@ -35,9 +38,9 @@ public:
         return film.get()[y * width + x];
     }
 
-    void write_image(const std::string &filename)
+    void write_image()
     {
-        std::ofstream file(filename + std::string(".ppm"));
+        std::ofstream file(filename);
 
         file << "P3" << std::endl
              << width << " " << height << std::endl

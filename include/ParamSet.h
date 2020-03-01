@@ -22,5 +22,6 @@ public:
     }
 
     void add_attribute(string key, string value);
+    string get_attribute(string key);
     void print();
 };

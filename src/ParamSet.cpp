@@ -5,6 +5,11 @@ void ParamSet::add_attribute(string key, string value)
     (*attributes)[key] = value;
 }
 
+string ParamSet::get_attribute(string key)
+{
+    return (*attributes)[key];
+}
+
 void ParamSet::print()
 {
     cout << " --- " << endl;

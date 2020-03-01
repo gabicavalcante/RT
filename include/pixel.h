@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 using color_t = unsigned char;
