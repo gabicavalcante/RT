@@ -1,25 +1,61 @@
 #pragma once
 
-#include "ray.h"
+#include "pixel.h"
+#include <memory>
+#include <fstream>
 
-class camera
+class Camera
 {
 public:
-    camera()
+    int width;
+    int height;
+    string filename;
+
+    std::shared_ptr<Pixel> film;
+
+    // camera borders
+    double l, r, b, t;
+
+    Camera(int width_, int height_, string filename_) : width(width_),
+                                                        height(height_),
+                                                        filename(filename_)
+
     {
-        lower_left_corner = vec3(-2.0, -1.0, -1.0);
-        horizontal = vec3(4.0, 0.0, 0.0);
-        vertical = vec3(0.0, 2.0, 0.0);
-        origin = vec3(0.0, 0.0, 0.0);
-    }
-    ray get_ray(float u, float v)
-    {
-        return ray(origin,
-                   lower_left_corner + u * horizontal + v * vertical - origin);
+        film = std::shared_ptr<Pixel>(new Pixel[width * height]);
     }
 
-    vec3 origin;
-    vec3 lower_left_corner;
-    vec3 horizontal;
-    vec3 vertical;
+    int get_width() const { return width; }
+    int get_height() const { return height; }
+
+    void add(const int &x, const int &y, const Pixel &color)
+    {
+        if (x < width && x >= 0 && y < height && y >= 0)
+            film.get()[y * width + x] = color;
+    }
+
+    Pixel &get_pixel(const int &x, const int &y)
+    {
+        return film.get()[y * width + x];
+    }
+
+    void write_image()
+    {
+        std::ofstream file(filename);
+
+        file << "P3" << std::endl
+             << width << " " << height << std::endl
+             << "256" << std::endl;
+
+        for (int y = height - 1; y >= 0; y--)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                Pixel &p = get_pixel(x, y);
+                file << (int)p.get_r() << " " << (int)p.get_g() << " " << (int)p.get_b() << " ";
+            }
+            file << std::endl;
+        }
+
+        file.close();
+    }
 };
