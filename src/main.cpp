@@ -5,21 +5,13 @@
 
 #include <iostream>
 
-void parser(std::string file_path)
-{
-	auto parser = RTParser::create(file_path);
-
-	auto api = API::get_instance();
-	api->camera(parser->read_object("film"));
-	api->background(parser->read_object("background"));
-}
-
 int main(int argc, char **argv)
 {
 	auto api = API::get_instance();
 	if (argc == 2)
 	{
-		parser(argv[1]);
+		auto parser = RTParser::create(argv[1]);
+		parser->run();
 
 		auto cam = api->get_camera();
 		int width = cam->get_width();
