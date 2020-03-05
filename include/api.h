@@ -22,6 +22,8 @@ public:
     static void camera(ParamSet ps);
     static std::shared_ptr<Camera> get_camera();
 
+    static void film(ParamSet ps);
+
     static void background(ParamSet ps);
     static std::shared_ptr<Background> get_background();
 };
@@ -34,6 +36,17 @@ API::API() {}
 
 void API::camera(ParamSet ps)
 {
+    std::string type;
+
+    type = ps.get_attribute("type");
+
+    Camera cam(type);
+
+    API::camera_ = std::make_shared<Camera>(cam);
+}
+
+void API::film(ParamSet ps)
+{
     int x_res, y_res;
     std::string filename;
 
@@ -41,8 +54,7 @@ void API::camera(ParamSet ps)
     y_res = std::stoi(ps.get_attribute("y_res"));
     filename = ps.get_attribute("filename");
 
-    Camera cam(x_res, y_res, filename);
-    API::camera_ = std::make_shared<Camera>(cam);
+    API::camera_->set_file(x_res, y_res, filename);
 }
 
 std::shared_ptr<Camera> API::get_camera()
