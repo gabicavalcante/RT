@@ -27,7 +27,8 @@ public:
     void run()
     {
         auto api = API::get_instance();
-        api->camera(read_object("film"));
+        api->camera(read_object("camera"));
+        api->film(read_object("film"));
         api->background(read_object("background"));
     }
 

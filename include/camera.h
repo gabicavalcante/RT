@@ -10,17 +10,20 @@ public:
     int width;
     int height;
     std::string filename;
+    std::string type;
 
     std::shared_ptr<Pixel> film;
 
     // camera borders
     double l, r, b, t;
 
-    Camera(int width_, int height_, std::string filename_) : width(width_),
-                                                             height(height_),
-                                                             filename(filename_)
+    Camera(std::string type_) : type(type_) {}
 
+    void set_file(int width_, int height_, std::string filename_)
     {
+        width = width_;
+        height = height_;
+        filename = filename_;
         film = std::shared_ptr<Pixel>(new Pixel[width * height]);
     }
 
