@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-void parser(std::string file_path)
+void parser_old(std::string file_path)
 {
 	auto parser = RTParser::create(file_path);
 
@@ -19,7 +19,8 @@ int main(int argc, char **argv)
 	auto api = API::get_instance();
 	if (argc == 2)
 	{
-		parser(argv[1]);
+		auto parser = RTParser::create(argv[1]);
+		parser->run();
 
 		auto cam = api->get_camera();
 		int width = cam->get_width();
