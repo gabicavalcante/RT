@@ -1,11 +1,12 @@
 #pragma once
 
 #include <memory>
+#include <vector>
+#include <sstream>
+
 #include "paramset.h"
 #include "camera.h"
 #include "background.h"
-#include <vector>
-#include <sstream>
 
 class API
 {
