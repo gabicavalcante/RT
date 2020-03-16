@@ -1,6 +1,6 @@
 #pragma once
 
-#include "pixel.h"
+#include "image/pixel.h"
 
 class Background
 {

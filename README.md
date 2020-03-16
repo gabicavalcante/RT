@@ -6,3 +6,5 @@
   - [x] camera
   - [x] film
   - [x] background
+
+- [Project 02](https://github.com/gabicavalcante/RT/tree/prj02)

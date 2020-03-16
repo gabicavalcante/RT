@@ -4,9 +4,10 @@
 #include <vector>
 #include <sstream>
 
-#include "paramset.h"
-#include "camera.h"
-#include "background.h"
+#include "core/paramset.h"
+#include "camera/camera.h"
+#include "camera/orthographic_camera.h"
+#include "image/background.h"
 
 class API
 {
@@ -46,13 +47,20 @@ API *API::get_instance()
 
 void API::camera(ParamSet ps)
 {
-    std::string type;
+    std::string type, screen_window;
 
     type = ps.get_attribute("type");
 
-    Camera cam(type);
+    if (type == "orthographic")
+    {
+        std::istringstream is(ps.get_attribute("screen_window"));
+        int l, r, b, t;
+        is >> l >> r >> b >> t;
 
-    API::camera_ = std::make_shared<Camera>(cam);
+        OrthographicCamera cam(l, r, b, t);
+
+        API::camera_ = std::make_shared<Camera>(cam);
+    }
 }
 
 void API::film(ParamSet ps)
@@ -64,7 +72,7 @@ void API::film(ParamSet ps)
     y_res = std::stoi(ps.get_attribute("y_res"));
     filename = ps.get_attribute("filename");
 
-    API::camera_->set_file(x_res, y_res, filename);
+    API::camera_->set_film(x_res, y_res, filename);
 }
 
 void API::background(ParamSet ps)

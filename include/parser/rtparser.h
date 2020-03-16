@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <memory>
-#include "tinyxml2.h"
-#include "paramset.h"
-#include "api.h"
+#include "parser/tinyxml2.h"
+#include "core/paramset.h"
+#include "core/api.h"
 
 class RTParser
 {
