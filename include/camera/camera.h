@@ -12,7 +12,7 @@ class Camera
 public:
     int width;
     int height;
-    std::string filename;
+    std::string output_filename;
     std::string type;
 
     vec3 v_up;
@@ -32,11 +32,12 @@ public:
         calc_camera_vectors();
     }
 
-    void set_film(int width_, int height_, std::string filename_)
+    void set_film(int width_, int height_, std::string output_filename_)
     {
         width = width_;
         height = height_;
-        filename = filename_;
+        output_filename = output_filename_;
+        
         film = std::shared_ptr<Pixel>(new Pixel[width * height]);
     }
 

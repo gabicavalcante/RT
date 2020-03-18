@@ -34,6 +34,8 @@ int main(int argc, char **argv)
 
 			auto color = background->sample(float(x) / float(width), float(y) / float(height));
 			cam->add(x, y, color);
+			// Pixel p = Li(r1, scene, sampler);
+      		// film->setPixel(i, j, p);
 		}
 	}
 	cam->write_image();

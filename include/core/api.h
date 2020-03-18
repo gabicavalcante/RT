@@ -66,13 +66,13 @@ void API::camera(ParamSet ps)
 void API::film(ParamSet ps)
 {
     int x_res, y_res;
-    std::string filename;
+    std::string output_filename;
 
     x_res = std::stoi(ps.get_attribute("x_res"));
     y_res = std::stoi(ps.get_attribute("y_res"));
-    filename = ps.get_attribute("filename");
+    output_filename = ps.get_attribute("filename");
 
-    API::camera_->set_film(x_res, y_res, filename);
+    API::camera_->set_film(x_res, y_res, output_filename);
 }
 
 void API::background(ParamSet ps)

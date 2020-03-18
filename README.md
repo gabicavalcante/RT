@@ -8,3 +8,9 @@
   - [x] background
 
 - [Project 02](https://github.com/gabicavalcante/RT/tree/prj02)
+
+- shape??
+- cenas
+  - lista de luzes
+  - backgroup
+  - lista de primitivas
