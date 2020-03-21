@@ -21,6 +21,15 @@ public:
         (*attributes)[key] = value;
     }
 
+    bool has_attribute(std::string key)
+    {
+        if ((*attributes).count(key))
+        {
+            return true;
+        }
+        return false;
+    }
+
     std::string get_attribute(std::string key)
     {
         return (*attributes)[key];

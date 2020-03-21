@@ -2,6 +2,6 @@
 
 #include "camera/camera.h"
 
-class PerspectiveCamera : public Camera
+class PerspectiveCamera : public Camera 
 {
 };

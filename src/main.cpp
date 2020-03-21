@@ -30,13 +30,15 @@ int main(int argc, char **argv)
 		{
 			// Generate ray with the view plane frame method.
 			ray r = cam->generate_ray(float(x), float(y));
-			std::cout << r << std::endl;
+			//std::cout << r << std::endl;
 
-			auto color = background->sample(float(x) / float(width), float(y) / float(height));
-			cam->add(x, y, color);
+			//auto color = background->sample(float(x) / float(width), float(y) / float(height));
+			auto color = background->sample_image(x, y);
+			cam->add_texture(x, y, color);
 			// Pixel p = Li(r1, scene, sampler);
-      		// film->setPixel(i, j, p);
+			// film->setPixel(i, j, p);
 		}
 	}
-	cam->write_image();
+	cam->encodeOneStep();
+	//cam->write_image();
 }

@@ -29,6 +29,7 @@ public:
         auto api = API::get_instance();
         api->camera(read_object("camera"));
         api->film(read_object("film"));
+        api->look_at(read_object("lookat"));
         api->background(read_object("background"));
     }
 

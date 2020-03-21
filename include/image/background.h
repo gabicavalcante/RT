@@ -7,22 +7,22 @@
 class Background
 {
 public:
-    std::string type;
+    std::string type, mapping;
     Pixel color;
     std::vector<unsigned char> image; //the raw pixels
+    unsigned width, height;
 
-    Background(std::string type_, Pixel color_) : type(type_), color(color_)
+    Background(std::string type_, Pixel color_, std::string mapping_, std::string filename) : type(type_), color(color_), mapping(mapping_)
     {
+        if (mapping_ == "screen")
+            decodeOneStep(filename.c_str());
     }
 
     //Decode from disk to raw pixels with a single function call
     void decodeOneStep(const char *filename)
     {
-        // std::vector<unsigned char> image;
-        unsigned width, height;
-
-        //decode
         unsigned error = lodepng::decode(image, width, height, filename);
+        std::cout << width << ", " << height << std::endl;
 
         //if there's an error, display it
         if (error)
@@ -42,6 +42,26 @@ public:
         int ib = int(color.get_b() * b);
 
         Pixel col(ir, ig, ib);
+        return col;
+    }
+
+    Pixel
+    sample_image(int x, int y)
+    {
+
+        //unsigned char p[3];
+        unsigned char *p = NULL;
+        std::cout << x << ", " << y << std::endl;
+        if (x < width && y > 0 && y < height)
+        {
+            p[0] = image[4 * y * width + 4 * x + 0];
+            p[1] = image[4 * y * width + 4 * x + 1];
+            p[2] = image[4 * y * width + 4 * x + 2];
+            Pixel col(p[0], p[1], p[2]);
+            return col;
+        }
+
+        Pixel col(255, 255, 255);
         return col;
     }
 };

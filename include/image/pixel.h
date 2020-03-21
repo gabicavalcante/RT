@@ -6,10 +6,11 @@ using color_t = unsigned char;
 
 class Pixel
 {
-private:
-    color_t colors[3];
+    //private:
+    //    color_t colors[3];
 
 public:
+    color_t colors[3];
     Pixel(color_t r = 0, color_t g = 0, color_t b = 0)
     {
         colors[0] = r;

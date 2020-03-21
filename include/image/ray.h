@@ -18,6 +18,7 @@ public:
     // ray function. p(t) moves the point along the ray / point_at_parameter
     point3 operator()(float t) const { return origin + (t * direction); }
 
+    // print the ray showing the origin and direction
     friend std::ostream &operator<<(std::ostream &os, const ray &r)
     {
         os << "(o =" << r.origin << ", d =" << r.direction << ")";
