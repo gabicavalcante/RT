@@ -29,14 +29,14 @@ int main(int argc, char **argv)
 		for (int x = 0; x < width; x++)
 		{
 			// Generate ray with the view plane frame method.
-			ray r = cam->generate_ray(float(x), float(y));
-			//std::cout << r << std::endl;
+			// ray r = cam->generate_ray(float(x), float(y));
+			// std::cout << r << std::endl;
 
 			//auto color = background->sample(float(x) / float(width), float(y) / float(height));
-			auto color = background->sample_image(x, y);
+			auto color = background->sample_image(float(x) / float(width), float(y) / float(height));
+			
+			// std::cout << color << std::endl;
 			cam->add_texture(x, y, color);
-			// Pixel p = Li(r1, scene, sampler);
-			// film->setPixel(i, j, p);
 		}
 	}
 	cam->encodeOneStep();

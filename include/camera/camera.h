@@ -69,7 +69,7 @@ public:
     ray generate_ray(float i, float j)
     {
         double u = l + ((r - l) * (i + 0.5)) / width;
-        double v = b + ((t - b) * (j + 0.5)) / height; 
+        double v = b + ((t - b) * (j + 0.5)) / height;
 
         point3 origin = position + (u * u_vec) + (v * v_vec);
         vec3 direction = -w_vec;
@@ -109,13 +109,10 @@ public:
 
     void add_texture(const int &x, const int &y, Pixel &color)
     {
-        if (x < width && x >= 0 && y < height && y >= 0)
-        {
-            image[4 * y * width + 4 * x + 0] = color.get_r();
-            image[4 * y * width + 4 * x + 1] = color.get_g();
-            image[4 * y * width + 4 * x + 2] = color.get_b();
-            image[4 * y * width + 4 * x + 3] = 255;
-        }
+        image[y * width + x + 0] = color.get_r();
+        image[y * width + x + 1] = color.get_g();
+        image[y * width + x + 2] = color.get_b();
+        image[y * width + x + 3] = 255;
     }
 
     Pixel &get_pixel(const int &x, const int &y)

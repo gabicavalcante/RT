@@ -12,7 +12,7 @@ public:
     std::vector<unsigned char> image; //the raw pixels
     unsigned width, height;
 
-    Background(std::string type_, Pixel color_, std::string mapping_, std::string filename) : type(type_), color(color_), mapping(mapping_)
+    Background(std::string type_, Pixel color_, std::string mapping_, std::string filename) : type(type_), mapping(mapping_), color(color_)
     {
         if (mapping_ == "screen")
             decodeOneStep(filename.c_str());
@@ -21,6 +21,7 @@ public:
     //Decode from disk to raw pixels with a single function call
     void decodeOneStep(const char *filename)
     {
+        std::cout << "decode image" << std::endl;
         unsigned error = lodepng::decode(image, width, height, filename);
         std::cout << width << ", " << height << std::endl;
 
@@ -46,22 +47,16 @@ public:
     }
 
     Pixel
-    sample_image(int x, int y)
+    sample_image(const float &x_, const float &y_)
     {
+        float x = x_ * width;
+        float y = y_ * height;
+        // std::cout << x << ", " << y << std::endl;
 
-        //unsigned char p[3];
-        unsigned char *p = NULL;
-        std::cout << x << ", " << y << std::endl;
-        if (x < width && y > 0 && y < height)
-        {
-            p[0] = image[4 * y * width + 4 * x + 0];
-            p[1] = image[4 * y * width + 4 * x + 1];
-            p[2] = image[4 * y * width + 4 * x + 2];
-            Pixel col(p[0], p[1], p[2]);
-            return col;
-        }
+        unsigned char *data = &(image[y * width + x]);
+        // std::cout << int(data[0]) << int(data[1]) << int(data[2]) << std::endl;
 
-        Pixel col(255, 255, 255);
+        Pixel col(data[0], data[1], data[2]);
         return col;
     }
 };
